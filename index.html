@@ -1239,7 +1239,7 @@
 
     .edl-row {
       display: grid;
-      grid-template-columns: auto 110px 1fr auto;
+      grid-template-columns: auto 100px 140px 1fr auto;
       gap: 20px;
       align-items: start;
       padding: 26px 0;
@@ -1273,6 +1273,37 @@
       color: var(--orange);
       font-size: 15px;
       padding-top: 8px;
+    }
+
+    .edl-row .edl-thumb {
+      width: 140px;
+      height: 78px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line-strong);
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+
+    .edl-row .edl-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s cubic-bezier(.16, .8, .3, 1), filter .3s ease;
+    }
+
+    .edl-row:hover .edl-thumb {
+      border-color: rgba(31, 207, 196, 0.45);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 16px rgba(31, 207, 196, 0.2);
+    }
+
+    .edl-row:hover .edl-thumb img {
+      transform: scale(1.06);
     }
 
     .edl-row .titles {}
@@ -1315,12 +1346,22 @@
     @media (max-width:720px) {
       .edl-row {
         grid-template-columns: auto 1fr;
-        gap: 8px 16px;
+        gap: 10px 16px;
       }
 
       .edl-row .year {
         grid-column: 2;
         padding-top: 0;
+      }
+
+      .edl-row .edl-thumb {
+        grid-column: 2;
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+        aspect-ratio: 16/9;
+        margin-top: 2px;
+        margin-bottom: 4px;
       }
 
       .edl-row .titles {
@@ -1330,6 +1371,200 @@
       .edl-row .tag {
         grid-column: 2;
         justify-self: start;
+      }
+    }
+
+    /* ---------- Advertisement & Reels Vertical Gallery Section ---------- */
+    .ads-section {
+      position: relative;
+      padding: min(12vw, 130px) 0;
+    }
+
+    .ads-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 30px;
+      padding: 0 8vw;
+    }
+
+    .ads-header-content {
+      max-width: 680px;
+    }
+
+    .ads-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .ads-nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--panel);
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .25s cubic-bezier(.16, .8, .3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
+
+    .ads-nav-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      transition: transform .2s ease;
+    }
+
+    .ads-nav-btn:hover:not(:disabled) {
+      background: var(--teal);
+      color: #04070b;
+      border-color: var(--teal);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(31, 207, 196, 0.4);
+    }
+
+    .ads-nav-btn.prev:hover:not(:disabled) svg {
+      transform: translateX(-2px);
+    }
+
+    .ads-nav-btn.next:hover:not(:disabled) svg {
+      transform: translateX(2px);
+    }
+
+    .ads-nav-btn:disabled {
+      opacity: 0.28;
+      cursor: not-allowed;
+      border-color: var(--line);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .ads-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: visible;
+    }
+
+    .ads-carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 8vw 32px 8vw;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .ads-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ads-carousel.is-dragging {
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      cursor: grabbing;
+    }
+
+    .ads-card {
+      flex: 0 0 clamp(200px, 17vw, 240px);
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      background: #080a0e;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+      scroll-snap-align: start;
+      transition: transform .38s cubic-bezier(.16, .8, .3, 1), border-color .3s ease, box-shadow .38s ease;
+      display: block;
+      cursor: pointer;
+    }
+
+    .ads-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      border-color: rgba(31, 207, 196, 0.6);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), 0 0 28px rgba(31, 207, 196, 0.25);
+    }
+
+    .ads-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s cubic-bezier(.16, .8, .3, 1), filter .35s ease;
+      will-change: transform;
+    }
+
+    .ads-card:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.06);
+    }
+
+    .ads-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(10, 12, 16, 0.65) 100%);
+      pointer-events: none;
+      transition: opacity .3s ease;
+      opacity: 0.5;
+    }
+
+    .ads-card:hover .ads-card-overlay {
+      opacity: 0.15;
+    }
+
+    .ads-carousel-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 0 8vw;
+    }
+
+    .ads-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--line-strong);
+      transition: all .3s ease;
+      cursor: pointer;
+    }
+
+    .ads-dot.active {
+      width: 24px;
+      background: var(--teal);
+      box-shadow: 0 0 10px rgba(31, 207, 196, 0.5);
+    }
+
+    @media (max-width: 900px) {
+      .ads-card {
+        flex: 0 0 clamp(180px, 28vw, 220px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .ads-header-row {
+        flex-direction: row;
+        align-items: flex-end;
+      }
+
+      .ads-card {
+        flex: 0 0 clamp(160px, 46vw, 200px);
+        border-radius: 14px;
       }
     }
 
@@ -2227,6 +2462,14 @@
       <symbol id="i-arrow" viewBox="0 0 24 24">
         <path d="M7 17L17 7M7 7h10v10" />
       </symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          fill="none" />
+      </symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24">
+        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          fill="none" />
+      </symbol>
       <symbol id="i-clapper" viewBox="0 0 24 24">
         <path d="M3 10l1.5-5L20 8.5 18.5 13z" />
         <rect x="3" y="10" width="18" height="9" rx="1" />
@@ -2344,6 +2587,7 @@
       <a href="#about">About</a>
       <a href="#toolkit">Toolkit</a>
       <a href="#credits">Credits</a>
+      <a href="#ads">Ads &amp; Reels</a>
       <a href="#reel">Reel</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -2630,6 +2874,9 @@
             <use href="#i-megaphone" />
           </svg></div>
         <div class="year">2026</div>
+        <div class="edl-thumb">
+          <img src="07.gif" alt="TVK Political Campaign preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>TVK Political Campaign</h3>
           <div class="role">Lead Video Editor</div>
@@ -2644,6 +2891,9 @@
             <use href="#i-film" />
           </svg></div>
         <div class="year">2026</div>
+        <div class="edl-thumb">
+          <img src="05.gif" alt="Chemistry preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Chemistry</h3>
           <div class="role">Spot Editor · Feature Film</div>
@@ -2658,6 +2908,9 @@
             <use href="#i-music" />
           </svg></div>
         <div class="year">2026</div>
+        <div class="edl-thumb">
+          <img src="06.gif" alt="Jingala preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Jingala</h3>
           <div class="role">Spot Editor · Official Video Song</div>
@@ -2671,6 +2924,9 @@
             <use href="#i-tv" />
           </svg></div>
         <div class="year">2026</div>
+        <div class="edl-thumb">
+          <img src="03.gif" alt="Kathal On Duty preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Kathal On Duty</h3>
           <div class="role">Video Editor · Web Series, KYN App</div>
@@ -2685,6 +2941,9 @@
             <use href="#i-play" />
           </svg></div>
         <div class="year">2025–26</div>
+        <div class="edl-thumb">
+          <img src="ezgif.com-video-to-gif-converter.gif" alt="Hotspot preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Hotspot</h3>
           <div class="role">Video Editor · YouTube Channel</div>
@@ -2699,6 +2958,9 @@
             <use href="#i-music" />
           </svg></div>
         <div class="year">2025</div>
+        <div class="edl-thumb">
+          <img src="ezgif-4671b1d439bd9288.gif" alt="Kaakum Vadivel preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Kaakum Vadivel</h3>
           <div class="role">Associate Video Editor · Official Video Song</div>
@@ -2713,6 +2975,9 @@
             <use href="#i-tv" />
           </svg></div>
         <div class="year">2023–25</div>
+        <div class="edl-thumb">
+          <img src="02.gif" alt="Disney+ Hotstar preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Disney+ Hotstar</h3>
           <div class="role">Promo Editor</div>
@@ -2727,6 +2992,9 @@
             <use href="#i-megaphone" />
           </svg></div>
         <div class="year">2024</div>
+        <div class="edl-thumb">
+          <img src="01.gif" alt="Dabur & Minmini preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>Dabur &amp; Minmini</h3>
           <div class="role">Video Editor · Happy Unicorn Production</div>
@@ -2741,6 +3009,9 @@
             <use href="#i-music" />
           </svg></div>
         <div class="year">2023</div>
+        <div class="edl-thumb">
+          <img src="04.gif" alt="MRT Music Company preview" loading="lazy" decoding="async" />
+        </div>
         <div class="titles">
           <h3>MRT Music Company</h3>
           <div class="role">Lyric Video Editor</div>
@@ -2751,9 +3022,113 @@
     </div>
   </section>
 
+  <!-- ADVERTISEMENT & REELS -->
+  <section id="ads" class="ads-section">
+    <div class="ads-header-row">
+      <div class="ads-header-content">
+        <div class="eyebrow mono">00:03 — Commercials &amp; Reels</div>
+        <h2 class="headline reveal">Advertisement &amp; Reels</h2>
+        <p class="ads-subtext reveal">High-retention social reels, dynamic OTT promos, and fast-paced commercial cuts
+          delivered for Disney+ Hotstar and digital campaigns.</p>
+      </div>
+      <div class="ads-nav-controls reveal">
+        <button class="ads-nav-btn prev" id="adsPrevBtn" aria-label="Previous reels" title="Scroll left">
+          <svg>
+            <use href="#i-chevron-left" />
+          </svg>
+        </button>
+        <button class="ads-nav-btn next" id="adsNextBtn" aria-label="Next reels" title="Scroll right">
+          <svg>
+            <use href="#i-chevron-right" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ads-carousel-wrapper reveal">
+      <div class="ads-carousel" id="adsCarousel" tabindex="0" role="region"
+        aria-label="Advertisement and Reels Gallery">
+
+        <!-- Reel Card 1 -->
+        <div class="ads-card">
+          <img src="18.gif" alt="Reel 01" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 2 -->
+        <div class="ads-card">
+          <img src="11.gif" alt="Reel 02" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 3 -->
+        <div class="ads-card">
+          <img src="12.gif" alt="Reel 03" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 4 -->
+        <div class="ads-card">
+          <img src="14.gif" alt="Reel 04" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 5 -->
+        <div class="ads-card">
+          <img src="16.gif" alt="Reel 05" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 6 -->
+        <div class="ads-card">
+          <img src="13.gif" alt="Reel 06" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 7 -->
+        <div class="ads-card">
+          <img src="15.gif" alt="Reel 07" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 8 -->
+        <div class="ads-card">
+          <img src="17.gif" alt="Reel 08" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 8 -->
+        <div class="ads-card">
+          <img src="19.gif" alt="Reel 08" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+        <!-- Reel Card 8 -->
+        <div class="ads-card">
+          <img src="reel-01.gif" alt="Reel 08" loading="lazy" decoding="async" />
+          <div class="ads-card-overlay"></div>
+        </div>
+
+
+      </div>
+
+      <!-- Carousel indicators / dots -->
+      <div class="ads-carousel-indicator" id="adsDots" aria-hidden="true">
+        <span class="ads-dot active" data-idx="0"></span>
+        <span class="ads-dot" data-idx="1"></span>
+        <span class="ads-dot" data-idx="2"></span>
+        <span class="ads-dot" data-idx="3"></span>
+        <span class="ads-dot" data-idx="4"></span>
+        <span class="ads-dot" data-idx="5"></span>
+        <span class="ads-dot" data-idx="6"></span>
+        <span class="ads-dot" data-idx="7"></span>
+      </div>
+    </div>
+  </section>
+
   <!-- REEL -->
   <section id="reel">
-    <div class="eyebrow mono">00:03 — Selected Work</div>
+    <div class="eyebrow mono">00:04 — Selected Work</div>
     <h2 class="headline reveal">A few titles from the Disney+ Hotstar reel.</h2>
     <div class="reel-grid">
       <div class="clip">
@@ -2812,7 +3187,7 @@
     <svg class="bg-icon" id="bgIconNumbers" width="380" height="380" style="right:-80px; bottom:-80px;">
       <use href="#i-wave" />
     </svg>
-    <div class="eyebrow mono">00:04 — By the Numbers</div>
+    <div class="eyebrow mono">00:05 — By the Numbers</div>
     <h2 class="headline reveal">Not just a highlight reel.</h2>
     <div class="stats reveal">
       <div class="stat">
@@ -2941,7 +3316,7 @@
       </div>
     </div>
 
-    <div class="eyebrow mono">00:05 — Contact</div>
+    <div class="eyebrow mono">00:06 — Contact</div>
     <h2 class="headline reveal">Let's cut something great.</h2>
     <p class="reveal" style="color:var(--muted);font-size:17px;margin-top:20px;max-width:52ch;">
       Got a channel, a campaign, or a deadline coming up? Send over the brief and I'll reply with timeline and pricing.
@@ -3063,12 +3438,200 @@
       }
       if (!reduceMotion) { window.addEventListener('scroll', onScrollParallax, { passive: true }); }
 
+      /* ---------------- Ads & Reels Infinite Carousel ---------------- */
+      (function initAdsCarousel() {
+        var carousel = document.getElementById('adsCarousel');
+        var prevBtn = document.getElementById('adsPrevBtn');
+        var nextBtn = document.getElementById('adsNextBtn');
+        var dotsContainer = document.getElementById('adsDots');
+        if (!carousel) return;
+
+        var originalCards = Array.from(carousel.querySelectorAll('.ads-card'));
+        var originalCount = originalCards.length;
+        if (originalCount === 0) return;
+
+        // Clone sets for seamless infinite wrapping: [Set 0 (clone), Set 1 (original), Set 2 (clone)]
+        var cloneBefore = originalCards.map(function (c) { var cl = c.cloneNode(true); cl.classList.add('is-clone'); return cl; });
+        var cloneAfter = originalCards.map(function (c) { var cl = c.cloneNode(true); cl.classList.add('is-clone'); return cl; });
+
+        // Insert clones before
+        cloneBefore.reverse().forEach(function (cl) {
+          carousel.insertBefore(cl, carousel.firstChild);
+        });
+        // Insert clones after
+        cloneAfter.forEach(function (cl) {
+          carousel.appendChild(cl);
+        });
+
+        // Calculate card dimensions and total set width
+        function getMetrics() {
+          var firstCard = carousel.querySelector('.ads-card');
+          var gap = 20;
+          if (firstCard && firstCard.nextElementSibling) {
+            var g = firstCard.nextElementSibling.offsetLeft - (firstCard.offsetLeft + firstCard.offsetWidth);
+            if (g > 0) gap = g;
+          }
+          var cardWidth = firstCard ? firstCard.offsetWidth : 220;
+          var cardStep = cardWidth + gap;
+          var setWidth = cardStep * originalCount;
+          return { cardWidth: cardWidth, gap: gap, cardStep: cardStep, setWidth: setWidth };
+        }
+
+        // Initialize scroll position in the center (Set 1 - original)
+        var isLooping = false;
+        var mInit = getMetrics();
+        carousel.scrollLeft = mInit.setWidth;
+
+        // Build dynamic dots for all original cards
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          for (var d = 0; d < originalCount; d++) {
+            var dot = document.createElement('span');
+            dot.className = 'ads-dot' + (d === 0 ? ' active' : '');
+            dot.dataset.idx = d;
+            (function (idx) {
+              dot.addEventListener('click', function () {
+                var m = getMetrics();
+                var currentCycle = Math.round(carousel.scrollLeft / m.setWidth);
+                var target = currentCycle * m.setWidth + idx * m.cardStep;
+                carousel.scrollTo({ left: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+              });
+            })(d);
+            dotsContainer.appendChild(dot);
+          }
+        }
+
+        function updateDots() {
+          var dots = dotsContainer ? dotsContainer.querySelectorAll('.ads-dot') : [];
+          if (!dots.length) return;
+          var m = getMetrics();
+          if (m.setWidth <= 0 || m.cardStep <= 0) return;
+          var normalized = ((carousel.scrollLeft % m.setWidth) + m.setWidth) % m.setWidth;
+          var activeIdx = Math.min(originalCount - 1, Math.max(0, Math.round(normalized / m.cardStep)));
+          dots.forEach(function (dot, i) {
+            dot.classList.toggle('active', i === activeIdx);
+          });
+        }
+
+        // Infinite boundary loop check
+        function checkInfiniteLoop() {
+          if (isLooping) return;
+          var m = getMetrics();
+          if (m.setWidth <= 0) return;
+
+          // If scrolled into left clone set
+          if (carousel.scrollLeft < m.setWidth * 0.4) {
+            isLooping = true;
+            carousel.style.scrollBehavior = 'auto';
+            carousel.scrollLeft += m.setWidth;
+            carousel.style.scrollBehavior = '';
+            isLooping = false;
+          }
+          // If scrolled into right clone set
+          else if (carousel.scrollLeft > m.setWidth * 1.6) {
+            isLooping = true;
+            carousel.style.scrollBehavior = 'auto';
+            carousel.scrollLeft -= m.setWidth;
+            carousel.style.scrollBehavior = '';
+            isLooping = false;
+          }
+
+          updateDots();
+        }
+
+        // Prev & Next Buttons (always enabled for infinite looping)
+        if (prevBtn) {
+          prevBtn.disabled = false;
+          prevBtn.addEventListener('click', function () {
+            var m = getMetrics();
+            var scrollAmount = Math.max(m.cardStep * 2, carousel.clientWidth * 0.75);
+            if (carousel.scrollLeft < m.setWidth * 0.5) {
+              carousel.style.scrollBehavior = 'auto';
+              carousel.scrollLeft += m.setWidth;
+              carousel.style.scrollBehavior = '';
+            }
+            carousel.scrollBy({ left: -scrollAmount, behavior: reduceMotion ? 'auto' : 'smooth' });
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.disabled = false;
+          nextBtn.addEventListener('click', function () {
+            var m = getMetrics();
+            var scrollAmount = Math.max(m.cardStep * 2, carousel.clientWidth * 0.75);
+            if (carousel.scrollLeft > m.setWidth * 1.5) {
+              carousel.style.scrollBehavior = 'auto';
+              carousel.scrollLeft -= m.setWidth;
+              carousel.style.scrollBehavior = '';
+            }
+            carousel.scrollBy({ left: scrollAmount, behavior: reduceMotion ? 'auto' : 'smooth' });
+          });
+        }
+
+        // Drag to scroll
+        var isDown = false;
+        var startX = 0;
+        var scrollLeftInit = 0;
+
+        carousel.addEventListener('mousedown', function (e) {
+          isDown = true;
+          carousel.classList.add('is-dragging');
+          startX = e.pageX - carousel.offsetLeft;
+          scrollLeftInit = carousel.scrollLeft;
+        });
+
+        window.addEventListener('mouseup', function () {
+          if (isDown) {
+            isDown = false;
+            carousel.classList.remove('is-dragging');
+          }
+        });
+
+        carousel.addEventListener('mouseleave', function () {
+          if (isDown) {
+            isDown = false;
+            carousel.classList.remove('is-dragging');
+          }
+        });
+
+        carousel.addEventListener('mousemove', function (e) {
+          if (!isDown) return;
+          e.preventDefault();
+          var x = e.pageX - carousel.offsetLeft;
+          var walk = (x - startX) * 1.5;
+          carousel.scrollLeft = scrollLeftInit - walk;
+          checkInfiniteLoop();
+        });
+
+        // Mouse wheel horizontal scroll with seamless infinite wrapping
+        carousel.addEventListener('wheel', function (e) {
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            carousel.scrollLeft += e.deltaY * 1.2;
+            checkInfiniteLoop();
+          }
+        }, { passive: false });
+
+        carousel.addEventListener('scroll', checkInfiniteLoop, { passive: true });
+        window.addEventListener('resize', function () {
+          checkInfiniteLoop();
+        }, { passive: true });
+
+        // Initial alignment
+        setTimeout(function () {
+          var m = getMetrics();
+          carousel.scrollLeft = m.setWidth;
+          updateDots();
+        }, 100);
+      })();
+
       /* ---------------- scrubber / timecode ---------------- */
       var chapters = [
         { id: 'top', label: 'HERO' },
         { id: 'about', label: 'ABOUT' },
         { id: 'toolkit', label: 'TOOLKIT' },
         { id: 'credits', label: 'CREDITS' },
+        { id: 'ads', label: 'ADS & REELS' },
         { id: 'reel', label: 'REEL' },
         { id: 'numbers', label: 'NUMBERS' },
         { id: 'contact', label: 'CONTACT' }
